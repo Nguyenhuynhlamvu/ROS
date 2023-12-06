@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<launch>
+
+      <!-- robot urdf load -->
+      <param name="robot_description" command="$(find xacro)/xacro '$(find library_robot)/urdf/real_robot.urdf.xacro' --inorder" />
+
+      <node name="robot_state_publisher"
+            pkg="robot_state_publisher" type="robot_state_publisher"
+            respawn="false" output="screen" />
+
+      <!-- Load controller configuration -->
+      <rosparam command="load" file="$(find library_robot)/config/controller.yaml" />
+
+      <!-- Start the controller manager -->
+      <node name="controller_manager" pkg="controller_manager" type="spawner" respawn="false" output="screen" 
+            args="left_wheel_controller right_wheel_controller"/>
+
+      <!-- Spawn controllers -->
+      <!-- <node name="controller_spawner" pkg="controller_manager" type="spawner"
+            args="joint_state_controller right_wheel_controller left_wheel_controller" /> -->
+
+      <!-- cmd_vel -->
+      <node name="cmd_vel" type="cmd_vel.py" pkg="library_robot" />
+
+      <!-- joint_state -->
+      <node name="joint_state" type="joint_state_new.py" pkg="library_robot" />
+      
+      <!-- odom -->
+      <node name="odom" type="odom.py" pkg="library_robot" />
+
+      <!-- lidar -->
+      <include file="$(find library_robot)/launch/ld14p.launch" />
+
+      <!-- Open rviz -->
+      <node pkg="rviz" type="rviz" name="rviz" args="-d $(find library_robot)/rviz/rviz_config_live.rviz" />
+            
+</launch>

@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<launch>
+      <include file="$(find gazebo_ros)/launch/empty_world.launch">
+            <arg name="world_name" value="$(find library_robot)/worlds/maze.world"/>
+            <arg name="debug" value="false"/>
+            <arg name="gui" value="true"/>
+            <arg name="paused" value="false"/>
+            <arg name="use_sim_time" value="true"/>
+            <arg name="headless" value="false"/>
+      </include>
+
+      <!-- robot urdf load -->
+      <param name="robot_description" command="$(find xacro)/xacro '$(find library_robot)/urdf/library_robot.urdf.xacro' --inorder" />
+
+      <node name="robot_state_publisher"
+            pkg="robot_state_publisher" type="robot_state_publisher"
+            respawn="false" output="screen" />
+
+      <!-- Load controller configuration -->
+      <rosparam command="load" file="$(find library_robot)/config/controller.yaml" />
+
+      <!-- Spawn controllers -->
+      <node name="controller_spawner" pkg="controller_manager" type="spawner"
+            args="joint_state_controller right_wheel_controller left_wheel_controller" />
+
+      <!-- Initial robot pose -->
+      <arg name="x_pos" default="0"/>
+      <arg name="y_pos" default="0"/>
+      <arg name="z_pos" default="0"/>
+      <arg name="roll" default="0"/>
+      <arg name="pitch" default="0"/>
+      <arg name="yaw" default="0"/>
+      <!-- <arg name="x_pos" default="5.5"/>
+      <arg name="y_pos" default="-2"/>
+      <arg name="z_pos" default="0"/>
+      <arg name="roll" default="0"/>
+      <arg name="pitch" default="0"/>
+      <arg name="yaw" default="1.57"/> -->
+
+      <!-- Spawn robot in gazebo -->
+      <node name="spawn_model" pkg="gazebo_ros" type="spawn_model"
+            args="-unpause
+                  -urdf
+                  -model robot
+                  -param robot_description
+                  -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"
+            respawn="false"
+            output="screen" />
+
+
+      <!-- Open rviz -->
+      <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d $(find library_robot)/rviz/rviz_config.rviz" /> -->
+
+      <!-- Arguments -->
+      <!-- <arg name="scan_topic"  default="scan"/> -->
+      
+      <!-- Gmapping -->
+      <!-- <node pkg="gmapping" type="slam_gmapping" name="diffbot_slam_gmapping" output="screen">
+      </node> -->
+
+      <!-- Arguments -->
+      <!-- <arg name="cmd_vel_topic" default="/cmd_vel" />
+      <arg name="odom_topic" default="/odom" /> -->
+      
+      <!-- remappings of move_base node -->
+      <!-- <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+      <remap from="odom" to="$(arg odom_topic)"/> -->
+
+      <!-- remapping of gmapping node -->
+      <!-- <remap from="scan" to="$(arg scan_topic)"/> -->
+      
+
+
+</launch>

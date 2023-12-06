@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<launch>
+    <!-- Open rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find library_robot)/config/rviz_config.rviz" />
+    
+</launch>

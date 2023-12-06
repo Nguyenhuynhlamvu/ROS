@@ -1,0 +1,18 @@
+# Parameters for the local costmap
+
+# Common parameters
+common:
+  update_frequency: 5.0   # Update frequency in Hz
+  publish_frequency: 2.0  # Publish frequency in Hz
+  width: 6.0              # Width of the costmap in meters
+  height: 6.0             # Height of the costmap in meters
+  resolution: 0.05        # Map resolution in meters per pixel
+
+# Parameters specific to the local costmap
+local_costmap:
+  global_frame: map        # Frame ID for the global map
+  robot_base_frame: base_link  # Frame ID for the robot's base
+  static_map: false        # Whether to use a static map
+  rolling_window: true     # Whether to use a rolling window
+
+# Additional parameters can be added based on specific requirements
