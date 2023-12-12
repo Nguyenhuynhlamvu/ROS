@@ -16,7 +16,7 @@ serial_port = serial.Serial(
 def callback(data):
     velocities = []
     a, b = [int(v) for v in data.velocity]
-    print(a, b)
+    # print(a, b)
     if a>=0:
         velocities.append(a)
         velocities.append(0)
@@ -29,6 +29,7 @@ def callback(data):
     else:
         velocities.append(0)
         velocities.append(-b)
+    print(velocities)
     serial_port.write(velocities)
     
 def listener():
