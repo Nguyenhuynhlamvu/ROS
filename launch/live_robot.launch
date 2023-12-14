@@ -17,14 +17,14 @@
             args="left_wheel_controller right_wheel_controller"/>
 
       <!-- Spawn controllers -->
-      <!-- <node name="controller_spawner" pkg="controller_manager" type="spawner"
+      <!-- <node name="controller_spawner" pkg="controller_manager " type="spawner"
             args="joint_state_controller right_wheel_controller left_wheel_controller" /> -->
 
       <!-- cmd_vel -->
       <node name="cmd_vel" type="cmd_vel.py" pkg="library_robot" />
 
       <!-- joint_state -->
-      <node name="joint_state" type="joint_state_new.py" pkg="library_robot" />
+      <node name="joint_state" type="joint_state.py" pkg="library_robot" />
       
       <!-- odom -->
       <node name="odom" type="odom.py" pkg="library_robot" />
