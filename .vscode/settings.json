@@ -1,0 +1,10 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/xuanai/jetson_fs/catkin_ws/devel/lib/python2.7/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/xuanai/jetson_fs/catkin_ws/devel/lib/python2.7/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ]
+}

@@ -1,7 +1,6 @@
 #!/usr/bin/python2
 import rospy
-from sensor_msgs.msg import JointState
-import time
+from geometry_msgs.msg import Twist
 import serial
 
 # pin = 12
@@ -26,8 +25,10 @@ serial_port = serial.Serial(
 
 def callback(data):
     velocities = []
-    a, b = [int(v) for v in data.velocity]
-    # print(a, b)
+    x_vel = data.linear.x
+    angular_vel = data.angular.z
+    a = int((x_vel + 0.5*angular_vel) * 100)
+    b = int((x_vel - 0.5*angular_vel) * 100)
     if a>=0:
         velocities.append(a)
         velocities.append(0)
@@ -40,14 +41,14 @@ def callback(data):
     else:
         velocities.append(0)
         velocities.append(-b)
-    # print(velocities)
+    print(velocities)
     serial_port.write(velocities)
     
 def listener():
       
     rospy.init_node('motors', anonymous=True)
 
-    rospy.Subscriber("cmd_vel", JointState, callback)
+    rospy.Subscriber("cmd_vel", Twist, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()

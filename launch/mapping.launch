@@ -22,5 +22,5 @@
     <!-- remapping of gmapping node -->
     <remap from="scan" to="$(arg scan_topic)"/>
 
-    <!-- Save map: rosrun map_server map_saver -f /home/xuanai/catkin_ws/src/library_robot/map/mymap  -->
+    <!-- Save map: rosrun map_server map_saver -f /home/jetson/catkin_ws/src/library_robot_ros/map/mymap  -->
 </launch>
