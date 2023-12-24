@@ -12,7 +12,7 @@ broadcaster = tf.TransformBroadcaster()
 class OdometryCalculator:
     def __init__(self):
         rospy.init_node('odometry_calculator', anonymous=True)
-        self.odom_pub = rospy.Publisher('/odom', Odometry, queue_size=10)
+        self.odom_pub = rospy.Publisher('/odom', Odometry, queue_size=40)
         self.joint_states_sub = rospy.Subscriber('/joint_states', JointState, self.joint_states_callback)
         
         # Parameters for odometry calculation
