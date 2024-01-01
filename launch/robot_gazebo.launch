@@ -2,7 +2,8 @@
 
 <launch>
       <include file="$(find gazebo_ros)/launch/empty_world.launch">
-            <arg name="world_name" value="$(find library_robot)/worlds/maze.world"/>
+            <!-- <arg name="world_name" value="$(find library_robot)/worlds/maze.world"/> -->
+            <arg name="world_name" value="$(find library_robot)/worlds/library_map.world"/>
             <arg name="debug" value="false"/>
             <arg name="gui" value="true"/>
             <arg name="paused" value="false"/>

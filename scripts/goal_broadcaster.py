@@ -6,11 +6,11 @@ import requests
 
 
 url = 'http://192.168.62.103:8000'
-response = requests.get(url + '/run_barcode')
+response = requests.get(url + '/coordinate')
 
 try:
     rospy.init_node('goal_broadcaster')
-    x, y, z = response.text.split(',')
+    x, y, w = response.text.split(',')
     # Your code here
     ac = SimpleActionClient('move_base', MoveBaseAction)
     ac.wait_for_server()
@@ -22,7 +22,7 @@ try:
     # Set the target position and orientation (example values)
     goal.target_pose.pose.position.x = float(x)
     goal.target_pose.pose.position.y = float(y)
-    goal.target_pose.pose.orientation.w = float(z)
+    goal.target_pose.pose.orientation.w = float(w)
 
     ac.send_goal(goal)
 
