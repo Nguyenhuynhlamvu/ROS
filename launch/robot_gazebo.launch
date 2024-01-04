@@ -51,7 +51,7 @@
 
 
       <!-- Open rviz -->
-      <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d $(find library_robot)/rviz/rviz_config.rviz" /> -->
+      <node pkg="rviz" type="rviz" name="rviz" args="-d $(find library_robot)/rviz/rviz_config.rviz" />
 
       <!-- Arguments -->
       <!-- <arg name="scan_topic"  default="scan"/> -->
